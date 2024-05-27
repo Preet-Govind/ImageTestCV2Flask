@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extract Text from PDF</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h4>Extract Text from PDF</h4>
+    <input type="file" id="pdfInput" accept=".pdf">
+    <input type="text" id="certNum"/>
+    <button id="submitButton">Extract Text</button>
+    <div id="response"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#submitButton").click(function(e) {
+                e.preventDefault();
+
+                const pdfFile = document.getElementById('pdfInput').files[0];
+				const certNum = document.getElementById('certNum').value;
+                if (!pdfFile) {
+                    $("#response").html("Please select a PDF file.");
+                    return;
+                }
+
+                if (!certNum) {
+                    $("#response").html("Please select a PDF file.");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('pdf_file', pdfFile);
+                formData.append('certNum',certNum)
+
+                $.ajax({
+                    url: '/extract_text',
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.error) {
+                            $("#response").html(response.error);
+                        } else {
+                            $("#response").html(response.text.replace(/\n/g, "<br>")); // Replace newlines with HTML breaks
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $("#response").html("Error: " + textStatus + ", " + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
