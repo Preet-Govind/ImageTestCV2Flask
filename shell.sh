@@ -37,7 +37,7 @@ if [[ $? -eq 0 ]]; then
   if [[ "$response" =~ ^[Yy]$ ]]; then
   # User confirmed, continue with the script
   echo "Continuing...installing associated libraries..."
-  pip install flask , pymupdf 
+  pip install flask , pymupdf , opencv-python , opencv-contrib-python , pillow
   # Your script logic here
 else
   # User declined, exit or perform alternative actions
