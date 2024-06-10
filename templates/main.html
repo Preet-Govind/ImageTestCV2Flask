@@ -41,11 +41,12 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        if (response.error) {
-                            $("#response").html(response.error);
-                        } else {
-                            $("#response").html(response.text.replace(/\n/g, "<br>")); // Replace newlines with HTML breaks
-                        }
+                        console.log(response)
+                        //if (response.error) {
+                        //    $("#response").html(response.error);
+                        //} else {
+                        //    $("#response").html(response.text.replace(/\n/g, "<br>")); // Replace newlines with HTML //breaks
+                        //}
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         $("#response").html("Error: " + textStatus + ", " + errorThrown);
