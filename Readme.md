@@ -5,3 +5,8 @@ uploaded and a search string which is to be searched throught out the pdf , in b
 
 
 OpenCV has been used for Laplacian operator implemented by laplacian() function . 
+
+to be corrected :-
+	1- every Py file has unused libraries
+	2- algorithms
+	3- more modular approach has to be adopted
